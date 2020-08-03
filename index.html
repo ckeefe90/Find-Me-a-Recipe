@@ -9,17 +9,12 @@
 
 <body>
     <div class="container">
-        <h1></h1>
+        <h1>Looking for recipe ideas?</h1>
         <form>
-            <!-- <label for="search-types">Let's Get Started</label>
-            <select id="search-types" name="search-types">
-                <option value="cuisine">Cuisine</option>
-                <option value="diet">Diet Restrictions</option>
-                <option value="intolerances">Intolerances</option>
-                <option value="meal-type">Meal Type</option>
-            </select> -->
-            <label for="cuisine">Cuisine Type</label>
+            <h2>Let's Get Started</h2>
+            <label for="cuisine">Cuisine:</label>
             <select id="cuisine" name="cuisine">
+                <option value="">None</option>
                 <option value="African">African</option>
                 <option value="American">American</option>
                 <option value="British">British</option>
@@ -47,6 +42,55 @@
                 <option value="Thai">Thai</option>
                 <option value="Vietnamese">Vietnamese</option>
             </select>
+            <label for="diet">Diet Restrictions:</label>
+            <select id="diet" name="diet">
+                <option value="">None</option>
+                <option value="Gluten Free">Gluten Free</option>
+                <option value="Ketogenic">Ketogenic</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Lacto-Vegetarian">Lacto-Vegetarian</option>
+                <option value="Ovo-Vegetarian">Ovo-Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Pescetarian">Pescetarian</option>
+                <option value="Paleo">Paleo</option>
+                <option value="Primal">Primal</option>
+                <option value="Whole30">Whole30</option>
+            </select>
+            <label for="intolerances">Intolerances:</label>
+            <select id="intolerances" name="intolerances">
+                <option value="">None</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Egg">Egg</option>
+                <option value="Gluten">Gluten</option>
+                <option value="Grain">Grain</option>
+                <option value="Peanut">Peanut</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Sesame">Sesame</option>
+                <option value="Shellfish">Shellfish</option>
+                <option value="Soy">Soy</option>
+                <option value="Sulfite">Sulfite</option>
+                <option value="Tree Nut">Tree Nut</option>
+                <option value="Wheat">Wheat</option>
+            </select>
+            <label for="meal-type">Meal Type:</label>
+            <select id="meal-type" name="meal-type">
+                <option value="">None</option>
+                <option value="main course">Main Course</option>
+                <option value="side dish">Side Dish</option>
+                <option value="dessert">Dessert</option>
+                <option value="appetizer">Appetizer</option>
+                <option value="salad">Salad</option>
+                <option value="bread">Bread</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="soup">Soup</option>
+                <option value="beverage">Beverage</option>
+                <option value="sauce">Sauce</option>
+                <option value="marinade">Marinade</option>
+                <option value="fingerfood">Fingerfood</option>
+                <option value="snack">Snack</option>
+                <option value="drink">Drink</option>
+            </select>
+            <p>You will receive 10 random recipes matching the selected personalizations.</p>
             <button type="submit">SEARCH</button>
         </form>
         <ul id="results" class="hidden"></ul>

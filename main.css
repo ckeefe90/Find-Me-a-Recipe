@@ -1,0 +1,17 @@
+#results {
+    list-style: none;
+}
+
+.recipe img {
+    display: block;
+    max-width: 150px;
+}
+
+.recipe {
+    margin: 10px 0;
+    border: solid black 2px;
+}
+
+.hidden {
+    display: none;
+}

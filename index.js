@@ -15,10 +15,17 @@ function searchCuisine() {
         return;
     }
     const cuisine = $('#cuisine option:selected').val();
+    const diet = $('#diet option:selected').val();
+    const intolerances = $('#intolerances option:selected').val();
+    const type = $('#meal-type option:selected').val();
     const params = {
         apiKey,
         number: 10,
-        cuisine
+        cuisine,
+        diet,
+        intolerances,
+        type,
+        sort: "random"
     };
 
     fetch(`${searchUrl}?${formatQueryParams(params)}`)
@@ -63,11 +70,10 @@ function displayResults(results) {
     for (let i = 0; i < results.length; i++) {
         $('#results').append(
             `<li class="recipe" id="${results[i].id}">
-            <details>
-                <summary>${results[i].title}</summary>
-                <button class="get-ingredients">Get Ingredients</button>
+                <h3>${results[i].title}</h3>
+                <img src="${results[i].image}" alt="${results[i].title}">
+                <button class="get-ingredients">View Ingredients</button>
                 <ul class="ingredients hidden"></ul>
-            </details>
             </li>`
         )
     }
