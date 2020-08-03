@@ -10,7 +10,8 @@ function formatQueryParams(params) {
 }
 
 function searchCuisine() {
-    if (!apiKey) {
+    const userKey = $('#api-key').val();
+    if (!apiKey && !userKey) {
         alert("API key is required");
         return;
     }
@@ -19,7 +20,7 @@ function searchCuisine() {
     const intolerances = $('#intolerances option:selected').val();
     const type = $('#meal-type option:selected').val();
     const params = {
-        apiKey,
+        apiKey: apiKey || userKey,
         number: 10,
         cuisine,
         diet,
