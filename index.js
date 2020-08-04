@@ -3,6 +3,15 @@
 let apiKey = "";
 const searchUrl = "https://api.spoonacular.com/recipes/complexSearch";
 
+function getApiKey() {
+    const userKey = $('#api-key').val();
+    if (!apiKey && !userKey) {
+        alert("API key is required");
+        return;
+    }
+    return apiKey || userKey;
+}
+
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -10,17 +19,12 @@ function formatQueryParams(params) {
 }
 
 function searchCuisine() {
-    const userKey = $('#api-key').val();
-    if (!apiKey && !userKey) {
-        alert("API key is required");
-        return;
-    }
     const cuisine = $('#cuisine option:selected').val();
     const diet = $('#diet option:selected').val();
     const intolerances = $('#intolerances option:selected').val();
     const type = $('#meal-type option:selected').val();
     const params = {
-        apiKey: apiKey || userKey,
+        apiKey: getApiKey(),
         number: 10,
         cuisine,
         diet,
@@ -41,21 +45,23 @@ function searchCuisine() {
         .catch(error => alert(error));
 }
 
-function getIngredients(id) {
-    fetch(`https://api.spoonacular.com/recipes/${encodeURIComponent(id)}/information?apiKey=${encodeURIComponent(apiKey)}`)
+function getRecipeInformation(id) {
+    fetch(`https://api.spoonacular.com/recipes/${encodeURIComponent(id)}/information?apiKey=${encodeURIComponent(getApiKey())}`)
         .then(response => {
             if (response.ok)
                 return response.json();
             throw "Unable to locate the ingredients."
         })
         .then(responseJson => {
-            displayIngredients(id, responseJson.extendedIngredients);
+            displayRecipeInformation(id, responseJson.sourceUrl, responseJson.extendedIngredients);
         })
         .catch(error => alert(error));
 }
 
-function displayIngredients(id, ingredients) {
+function displayRecipeInformation(id, sourceUrl, ingredients) {
     const ingredientsList = $(`#${id} .ingredients`);
+    const recipeUrl = $(`#${id} a`);
+    recipeUrl.attr("href", sourceUrl);
     ingredientsList.empty();
     for (let i = 0; i < ingredients.length; i++) {
         ingredientsList.append(
@@ -63,19 +69,22 @@ function displayIngredients(id, ingredients) {
         )
     }
     ingredientsList.removeClass('hidden');
+    recipeUrl.removeClass('hidden');
 }
-
 
 function displayResults(results) {
     $('#results').empty();
     for (let i = 0; i < results.length; i++) {
         $('#results').append(
-            `<li class="recipe" id="${results[i].id}">
+            `<div class="recipe" id="${results[i].id}">
+                <div class="recipe-info">
                 <h3>${results[i].title}</h3>
                 <img src="${results[i].image}" alt="${results[i].title}">
                 <button class="get-ingredients">View Ingredients</button>
+                </div>
+                <a href="#" class="hidden">Take me to the recipe</a>
                 <ul class="ingredients hidden"></ul>
-            </li>`
+            </div>`
         )
     }
     $('#results').removeClass('hidden');
@@ -88,7 +97,7 @@ function watchForm() {
     });
     $('#results').on('click', ".get-ingredients", function() {
         const id = $(this).closest(".recipe").attr('id');
-        getIngredients(id);
+        getRecipeInformation(id);
     })
 }
 

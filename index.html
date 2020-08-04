@@ -5,19 +5,54 @@
     <title>Find Me a Recipe</title>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Lora&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Looking for recipe ideas?</h1>
-        <form>
-            <h2>Let's Get Started</h2>
-            <a href="https://spoonacular.com/food-api/console">Please create an API key at Spoonacular</a>
-            <br>
-            <label for="api-key">Enter your API key</label>
-            <input id="api-key">
-            <br>
-            <label for="cuisine">Cuisine:</label>
+    <h1>Looking for recipe ideas?</h1>
+    <form>
+        <p>Please create an API key at <a href="https://spoonacular.com/food-api/console">Spoonacular</a>.</p>
+        <label for="api-key">API Key:
+            <input id="api-key" placeholder="Your Spoonacular API Key">
+        </label>
+        <h2>Recipe Personalizations</h2>
+        <label for="intolerances">Intolerances:
+            <select id="intolerances" name="intolerances">
+                <option value="">None</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Egg">Egg</option>
+                <option value="Gluten">Gluten</option>
+                <option value="Grain">Grain</option>
+                <option value="Peanut">Peanut</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Sesame">Sesame</option>
+                <option value="Shellfish">Shellfish</option>
+                <option value="Soy">Soy</option>
+                <option value="Sulfite">Sulfite</option>
+                <option value="Tree Nut">Tree Nut</option>
+                <option value="Wheat">Wheat</option>
+            </select>
+        </label>
+        <label for="meal-type">Meal Type:
+            <select id="meal-type" name="meal-type">
+                <option value="">None</option>
+                <option value="main course">Main Course</option>
+                <option value="side dish">Side Dish</option>
+                <option value="dessert">Dessert</option>
+                <option value="appetizer">Appetizer</option>
+                <option value="salad">Salad</option>
+                <option value="bread">Bread</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="soup">Soup</option>
+                <option value="beverage">Beverage</option>
+                <option value="sauce">Sauce</option>
+                <option value="marinade">Marinade</option>
+                <option value="fingerfood">Fingerfood</option>
+                <option value="snack">Snack</option>
+                <option value="drink">Drink</option>
+            </select>
+        </label>
+        <label for="cuisine">Cuisine:
             <select id="cuisine" name="cuisine">
                 <option value="">None</option>
                 <option value="African">African</option>
@@ -47,7 +82,8 @@
                 <option value="Thai">Thai</option>
                 <option value="Vietnamese">Vietnamese</option>
             </select>
-            <label for="diet">Diet Restrictions:</label>
+        </label>
+        <label for="diet">Diet:
             <select id="diet" name="diet">
                 <option value="">None</option>
                 <option value="Gluten Free">Gluten Free</option>
@@ -61,45 +97,11 @@
                 <option value="Primal">Primal</option>
                 <option value="Whole30">Whole30</option>
             </select>
-            <label for="intolerances">Intolerances:</label>
-            <select id="intolerances" name="intolerances">
-                <option value="">None</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Egg">Egg</option>
-                <option value="Gluten">Gluten</option>
-                <option value="Grain">Grain</option>
-                <option value="Peanut">Peanut</option>
-                <option value="Seafood">Seafood</option>
-                <option value="Sesame">Sesame</option>
-                <option value="Shellfish">Shellfish</option>
-                <option value="Soy">Soy</option>
-                <option value="Sulfite">Sulfite</option>
-                <option value="Tree Nut">Tree Nut</option>
-                <option value="Wheat">Wheat</option>
-            </select>
-            <label for="meal-type">Meal Type:</label>
-            <select id="meal-type" name="meal-type">
-                <option value="">None</option>
-                <option value="main course">Main Course</option>
-                <option value="side dish">Side Dish</option>
-                <option value="dessert">Dessert</option>
-                <option value="appetizer">Appetizer</option>
-                <option value="salad">Salad</option>
-                <option value="bread">Bread</option>
-                <option value="breakfast">Breakfast</option>
-                <option value="soup">Soup</option>
-                <option value="beverage">Beverage</option>
-                <option value="sauce">Sauce</option>
-                <option value="marinade">Marinade</option>
-                <option value="fingerfood">Fingerfood</option>
-                <option value="snack">Snack</option>
-                <option value="drink">Drink</option>
-            </select>
-            <p>You will receive 10 random recipes matching the selected personalizations.</p>
-            <button type="submit">SEARCH</button>
-        </form>
-        <ul id="results" class="hidden"></ul>
-    </div>
+            </label>
+        <p>You will receive 10 random recipes matching the selected personalizations.</p>
+        <button type="submit">FIND RECIPES</button>
+    </form>
+    <section id="results" class="hidden"></section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="index.js"></script>
 </body>
