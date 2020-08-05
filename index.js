@@ -1,8 +1,10 @@
 'use strict';
 
+// variable for api key and search url
 let apiKey = "";
 const searchUrl = "https://api.spoonacular.com/recipes/complexSearch";
 
+// function to alert that an api key is required
 function getApiKey() {
     const userKey = $('#api-key').val();
     if (!apiKey && !userKey) {
@@ -17,14 +19,17 @@ function formatQueryParams(params) {
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     return queryItems.join('&');
 }
-
-function searchCuisine() {
+// search through all of the available personalizations
+function searchRecipes() {
+    const key = getApiKey();
+    if (!key)
+        return;
     const cuisine = $('#cuisine option:selected').val();
     const diet = $('#diet option:selected').val();
     const intolerances = $('#intolerances option:selected').val();
     const type = $('#meal-type option:selected').val();
     const params = {
-        apiKey: getApiKey(),
+        apiKey: key,
         number: 10,
         cuisine,
         diet,
@@ -32,7 +37,7 @@ function searchCuisine() {
         type,
         sort: "random"
     };
-
+    // make a call to spoonacular api to search for recipes
     fetch(`${searchUrl}?${formatQueryParams(params)}`)
         .then(response => {
             if (response.ok)
@@ -45,6 +50,8 @@ function searchCuisine() {
         .catch(error => alert(error));
 }
 
+
+// request the recipe information
 function getRecipeInformation(id) {
     fetch(`https://api.spoonacular.com/recipes/${encodeURIComponent(id)}/information?apiKey=${encodeURIComponent(getApiKey())}`)
         .then(response => {
@@ -58,6 +65,8 @@ function getRecipeInformation(id) {
         .catch(error => alert(error));
 }
 
+
+// function to display the recipe information
 function displayRecipeInformation(id, sourceUrl, ingredients) {
     const ingredientsList = $(`#${id} .ingredients`);
     const recipeUrl = $(`#${id} a`);
@@ -72,8 +81,14 @@ function displayRecipeInformation(id, sourceUrl, ingredients) {
     recipeUrl.removeClass('hidden');
 }
 
+
+// function to display the recipe search results including title, image & source url
 function displayResults(results) {
     $('#results').empty();
+    if (results.length === 0)
+        $('#results').append(
+            "<div><h3>No results found, please try another combination.</h3></div>"
+        );
     for (let i = 0; i < results.length; i++) {
         $('#results').append(
             `<div class="recipe" id="${results[i].id}">
@@ -82,7 +97,7 @@ function displayResults(results) {
                 <img src="${results[i].image}" alt="${results[i].title}">
                 <button class="get-ingredients">View Ingredients</button>
                 </div>
-                <a href="#" class="hidden">Take me to the recipe</a>
+                <a href="#" target="_blank" class="hidden">Take me to the recipe</a>
                 <ul class="ingredients hidden"></ul>
             </div>`
         )
@@ -93,7 +108,7 @@ function displayResults(results) {
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
-        searchCuisine();
+        searchRecipes();
     });
     $('#results').on('click', ".get-ingredients", function() {
         const id = $(this).closest(".recipe").attr('id');
