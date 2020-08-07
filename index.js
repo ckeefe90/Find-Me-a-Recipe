@@ -8,7 +8,10 @@ const searchUrl = "https://api.spoonacular.com/recipes/complexSearch";
 function getApiKey() {
     const userKey = $('#api-key').val();
     if (!apiKey && !userKey) {
-        alert("API key is required");
+        $('#results').empty();
+        $('#results').append(
+            "<div><h3>API key is required.</h3></div>"
+        );
         return;
     }
     return apiKey || userKey;
@@ -47,7 +50,12 @@ function searchRecipes() {
         .then(responseJson => {
             displayResults(responseJson.results);
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            $('#results').empty();
+            $('#results').append(
+                `<div><h3>${error}</h3></div>`
+            );
+        });
 }
 
 
@@ -62,7 +70,12 @@ function getRecipeInformation(id) {
         .then(responseJson => {
             displayRecipeInformation(id, responseJson.sourceUrl, responseJson.extendedIngredients);
         })
-        .catch(error => alert(error));
+        .catch(error => {
+            $('#results').empty();
+            $('#results').append(
+                `<div><h3>${error}</h3></div>`
+            );
+        });
 }
 
 

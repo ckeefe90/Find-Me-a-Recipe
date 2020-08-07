@@ -6,7 +6,7 @@
     margin: 0 auto;
 }
 
-#results div {
+.recipe {
     width: 200px;
 }
 
@@ -23,12 +23,16 @@ h3 {
 .recipe img {
     display: block;
     max-width: 185px;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .get-ingredients {
     margin: 0 auto 10px;
     width: fit-content;
+}
+
+.ingredients {
+    text-align: left;
 }
 
 .recipe {
@@ -38,7 +42,7 @@ h3 {
 
 .recipe-info {
     display: flex;
-    height: 290px;
+    height: min-content;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -55,4 +59,13 @@ body {
     text-align: center;
     font-family: 'Lora', serif;
     background-color: #89A5AB;
+}
+
+@media only screen and (max-width: 424px) {
+    .recipe {
+        width: 90%;
+    }
+    .recipe img {
+        max-width: 85%;
+    }
 }
