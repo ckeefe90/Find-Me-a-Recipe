@@ -13,7 +13,7 @@ This is a recipe searching app that will give up to 10 random results. The user 
 
 ## Link to App
 
-https://ckeefe90.github.io/Find-Me-a-Recipe/
+https://find-me-a-recipe.vercel.app/
 
 ## App Preview
 
